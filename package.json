@@ -1,0 +1,23 @@
+{
+  "name": "typescriptfromzeroudemy",
+  "version": "1.0.0",
+  "description": "Learn Typescript from Max in Udemy.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhythm244/typescriptFromZeroUdemy.git"
+  },
+  "author": "Thong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rhythm244/typescriptFromZeroUdemy/issues"
+  },
+  "homepage": "https://github.com/rhythm244/typescriptFromZeroUdemy#readme",
+  "dependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
