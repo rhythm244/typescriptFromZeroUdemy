@@ -1,15 +1,14 @@
-//object
-var logger = function () {
-    var userData = {
+"use strict";
+const logger = () => {
+    const userData = {
         username: "Thong",
         id: "rwge;agndfnvierpjngoesge",
         firstName: "wasawat",
         lastName: "bourperk",
         birthDate: new Date("1995-09-24"),
-        address: ["65/110 vistavile", "poemsin16"]
+        address: ["65/110 vistavile", "poemsin16"],
     };
-    //enum
-    var Role;
+    let Role;
     (function (Role) {
         Role[Role["ADMIN"] = 0] = "ADMIN";
         Role[Role["READ_ONLY"] = 1] = "READ_ONLY";
@@ -18,9 +17,8 @@ var logger = function () {
     console.log(userData);
     return 0;
 };
-//union example
 function combine(input1, input2) {
-    var result;
+    let result;
     if (typeof input1 === "number" && typeof input2 === "number") {
         result = input1 + input2;
         return result;
@@ -30,11 +28,9 @@ function combine(input1, input2) {
         return result;
     }
 }
-var combineAges = combine(30, 20);
-// console.log(combineAges);
-//Literal Type
+const combineAges = combine(30, 20);
 function combineLiteral(input1, input2, resultConversion) {
-    var result;
+    let result;
     if (typeof input1 === "number" && typeof input2 === "number") {
         result = input1 + input2;
         return result;
@@ -44,7 +40,6 @@ function combineLiteral(input1, input2, resultConversion) {
         return result;
     }
 }
-//type aliase - return type
 function add(n1, n2) {
     return n1 + n2;
 }
@@ -52,28 +47,26 @@ function printResult(num) {
     console.log("Result: " + num);
 }
 printResult(add(5, 12));
-//เป็นการบอกว่า combineValues สามารถ assign function ที่รับค่า number2 ค่า แล้ว return number เท่านั้น
-var combineValues;
+let combineValues;
 combineValues = add;
-//function type callback
 function addAndHandler(n1, n2, callback) {
-    var result = n1 + n2;
+    const result = n1 + n2;
     callback(result);
 }
-addAndHandler(10, 20, function (result) {
+addAndHandler(10, 20, (result) => {
     console.log(result);
 });
-//type unknown -- need to if check
-//unknown จะ more stric than any
-var userInput;
-var userName;
+let userInput;
+let userName;
 userInput = 5;
 userInput = "Max";
-//ถ้าไม่ check ว่าเป็น string จริงๆจึงจะทำการ assign ค่าได้
 if (typeof userInput === "string") {
     userName = userInput;
 }
-//type never ส่วนมากจะมากลับ function ที่ throw error
 function gernerateError(message, code) {
     throw { message: message, errorCode: code };
 }
+function test() {
+    console.log('test');
+}
+//# sourceMappingURL=basic.js.map

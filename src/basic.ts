@@ -112,3 +112,7 @@ if (typeof userInput === "string") {
 function gernerateError(message: string, code: number): never {
   throw { message: message, errorCode: code };
 }
+
+function test() {
+  console.log('test')
+}
