@@ -69,4 +69,3 @@ function gernerateError(message, code) {
 function test() {
     console.log('test');
 }
-//# sourceMappingURL=basic.js.map
