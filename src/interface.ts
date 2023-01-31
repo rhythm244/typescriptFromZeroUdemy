@@ -5,7 +5,8 @@ console.log("interface");
 //type มันจะ Flexible มากกว่า
 
 interface Named {
-  readonly name: string;
+  readonly name?: string;
+  outputName?: string; //optional parameters
 }
 
 interface Greetable extends Named {
@@ -14,10 +15,12 @@ interface Greetable extends Named {
 
 //interface สามารถใช้ร่วมกับ Class ได้
 class Person implements Greetable {
-  name: string;
+  name?: string;
   age: number;
-  constructor(n: string) {
-    this.name = n;
+  constructor(n?: string) {
+    if (n) {
+      this.name = n;
+    }
     this.age = 33;
   }
 
@@ -33,3 +36,13 @@ user1 = new Person("Thong");
 // user1.name = 'thong'; ทำไม่ได้เพราะ interface name เป็น readonly
 
 console.log(user1.name);
+
+interface AddFn {
+  (a: number, b: number): number;
+}
+
+let addFn: AddFn;
+
+add = (n1: number, n2: number) => {
+  return n1 + n2;
+};
