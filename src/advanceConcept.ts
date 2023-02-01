@@ -132,3 +132,8 @@ const userInputElement = document.getElementById(
 ) as HTMLInputElement;
 
 userInputElement.value = "Hi there";
+
+//index type
+interface ErrorContainer {
+  
+}
