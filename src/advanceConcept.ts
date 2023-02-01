@@ -1,5 +1,5 @@
 //intersections type
-
+//-------------------------------------------------------------------
 type Admin = {
   name: string;
   privileges: string[];
@@ -77,3 +77,58 @@ function useVihecle(vihecle: Vehicle) {
 
 useVihecle(v1);
 useVihecle(v2);
+
+//-------------------------------------------------------------------
+//Discriminated Unions
+interface Bird {
+  type: "bird";
+  flyingSpeed: number;
+}
+
+interface Horse {
+  type: "horse";
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+//แบบนี้สามารถทำได้
+// function moveAnimal(animal: Animals) {
+//   if ("flyingSpeed" in animal) {
+//     console.log("Moving with speed: " + animal.flyingSpeed);
+//   }
+// }
+
+//แต่แบบนี้ทำไม่ได้ เพราะว่า interface Bird JS ตอน runtime มันไม่เข้าใจ
+// function moveAnimal2(animal: Animals) {
+//   if (animal instanceof Bird) {
+//     console.log("Moving with speed: " + animal.flyingSpeed);
+//   }
+// }
+
+//Discriminated Unions
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch (animal.type) {
+    case "bird":
+      speed = animal.flyingSpeed;
+      break;
+    case "horse":
+      speed = animal.runningSpeed;
+  }
+}
+
+moveAnimal({ type: "bird", flyingSpeed: 10 });
+
+//-------------------------------------------------------------------
+//Type Casting
+const paragraph = document.getElementById("message-output");
+// const userInputElement = <HTMLInputElement>(
+//   document.getElementById("user-intput")
+// );
+
+const userInputElement = document.getElementById(
+  "user-intput"
+) as HTMLInputElement;
+
+userInputElement.value = "Hi there";

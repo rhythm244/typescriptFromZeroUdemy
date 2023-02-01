@@ -42,3 +42,17 @@ function useVihecle(vihecle) {
 }
 useVihecle(v1);
 useVihecle(v2);
+function moveAnimal(animal) {
+    let speed;
+    switch (animal.type) {
+        case "bird":
+            speed = animal.flyingSpeed;
+            break;
+        case "horse":
+            speed = animal.runningSpeed;
+    }
+}
+moveAnimal({ type: "bird", flyingSpeed: 10 });
+const paragraph = document.getElementById("message-output");
+const userInputElement = document.getElementById("user-intput");
+userInputElement.value = "Hi there";
