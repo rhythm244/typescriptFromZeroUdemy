@@ -133,7 +133,50 @@ const userInputElement = document.getElementById(
 
 userInputElement.value = "Hi there";
 
-//index type
+// 87. index properties
 interface ErrorContainer {
-  
+  //{ email: 'Not a valid email', username: 'Must start with character'}
+  [props: string]: string; //มีประโยชน์ตอนที่ไม่รู้ว่าจะมีกี่ Key และมันชื่อว่าอะไร
 }
+
+const errorBag: ErrorContainer = {
+  email: "Not a valid email",
+  userName: "Must start with character",
+};
+
+console.log(errorBag);
+
+// 88. Function Overload
+type Combinealbe4 = string | number;
+type Numeric2 = number | boolean;
+type Universal2 = Combinealbe & Numeric;
+
+//Function overload เป็นการบอก TS ว่าฟังก์ชั่นนี้จะ return อะไรออกมาเพราะมันเป็น union type ในตอนแรก
+function add8(n1: number, n2: number): number;
+function add8(n1: string, n2: string): string;
+function add8(n1: Combinealbe4, n2: Combinealbe4): Combinealbe4 {
+  if (typeof n1 === "string" || typeof n2 === "string") {
+    return n1.toString() + n2.toString();
+  }
+
+  return n1 + n2;
+}
+
+// const result = add8("Max", "Schawt");
+const result = add8(1, 5);
+
+// 89. Optional Chaning
+const fetchUserData = {
+  id: "u1",
+  name: "Max",
+  job: { title: "CEO", description: "My own company." },
+};
+
+console.log(fetchUserData?.job?.title);
+
+// 90. nullish coalescing
+const userInput2 = "";
+const storedData = userInput2 || "Default"; //ปัญหาของการใช้แบบนี้คือ ถ้า userInput2 เป็น '' มันจะใช้ค่าด้านหลัง ||
+
+const storedData2 = userInput2 ?? "Default555";
+console.log(storedData2);
