@@ -98,13 +98,13 @@ class Component {
 }
 class ProjectList extends Component {
     constructor(type) {
-        super("project-list", "app", false, `${type}-projects`);
         this.type = type;
+        this.templateElement = (document.getElementById("project-list"));
+        this.hostElement = document.getElementById("app");
         this.assignProjects = [];
-        this.configure();
-        this.renderContent();
-    }
-    configure() {
+        const importNode = document.importNode(this.templateElement.content, true);
+        this.element = importNode.firstElementChild;
+        this.element.id = `${this.type}-projects`;
         projectState.addListener((projects) => {
             const relevantProjects = projects.filter((prj) => {
                 if (this.type === "active") {
@@ -117,6 +117,8 @@ class ProjectList extends Component {
             this.assignProjects = relevantProjects;
             this.renderProjects();
         });
+        this.attach();
+        this.renderContent();
     }
     renderProjects() {
         const listEl = (document.getElementById(`${this.type}-projects-list`));
@@ -132,6 +134,9 @@ class ProjectList extends Component {
         this.element.querySelector("ul").id = listId;
         this.element.querySelector("h2").textContent =
             this.type.toUpperCase() + " PROJECTS";
+    }
+    attach() {
+        this.hostElement.insertAdjacentElement("beforeend", this.element);
     }
 }
 class ProjectInput {

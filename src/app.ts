@@ -156,24 +156,23 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement> {
   abstract renderContent(): void;
 }
 
-class ProjectList extends Component<> {
-  templateElement: HTMLTemplateElement;
-  hostElement: HTMLDivElement;
-  element: HTMLElement;
+class ProjectList extends Component<HTMLDivElement, HTMLElement> {
   assignProjects: Project[];
 
   constructor(private type: "active" | "finished") {
-    this.templateElement = <HTMLTemplateElement>(
-      document.getElementById("project-list")
-    );
+    super("project-list", "app", false, `${type}-projects`);
 
-    this.hostElement = <HTMLDivElement>document.getElementById("app")!;
     this.assignProjects = [];
-    const importNode = document.importNode(this.templateElement.content, true);
-    this.element = importNode.firstElementChild as HTMLElement;
-    this.element.id = `${this.type}-projects`;
 
     //---------------------------------------------------------------------------------------------------------------------------------------
+
+    this.configure();
+    this.renderContent();
+  }
+
+  configure() {
+    // above block of code will be executed, means that anonymous function will go and sit (no-execution will happen) inside listeners[] array.
+    // Because, the work of addListener() function is just to add a new function inside listeners[] array every time it get called.
     projectState.addListener((projects: Project[]) => {
       const relevantProjects = projects.filter((prj) => {
         if (this.type === "active") {
@@ -186,11 +185,6 @@ class ProjectList extends Component<> {
       this.assignProjects = relevantProjects;
       this.renderProjects();
     });
-    // above block of code will be executed, means that anonymous function will go and sit (no-execution will happen) inside listeners[] array.
-    // Because, the work of addListener() function is just to add a new function inside listeners[] array every time it get called.
-
-    this.attach();
-    this.renderContent();
   }
 
   renderProjects() {
@@ -205,16 +199,16 @@ class ProjectList extends Component<> {
     }
   }
 
-  private renderContent() {
+  renderContent() {
     const listId = `${this.type}-projects-list`;
     this.element.querySelector("ul")!.id = listId;
     this.element.querySelector("h2")!.textContent =
       this.type.toUpperCase() + " PROJECTS";
   }
 
-  private attach() {
-    this.hostElement.insertAdjacentElement("beforeend", this.element);
-  }
+  // private attach() {
+  //   this.hostElement.insertAdjacentElement("beforeend", this.element);
+  // }
 }
 
 class ProjectInput {
