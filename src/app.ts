@@ -1,8 +1,26 @@
+//Project Type
+enum ProjectStatus {
+  Active,
+  Finished,
+}
+class Project {
+  constructor(
+    public id: string,
+    public title: string,
+    public description: string,
+    public people: number,
+    public status: ProjectStatus
+  ) {}
+}
+
 //Project State management
 
+type Listener = (items: Project[]) => void;
+
 class ProjectState {
-  private listeners: any[] = [];
-  private projects: any[] = [];
+  private listeners: Listener[] = [];
+
+  private projects: Project[] = [];
   private static instance: ProjectState;
 
   private constructor() {}
@@ -13,23 +31,25 @@ class ProjectState {
     return this.instance;
   }
 
-  addListener(listenerFn: Function) {
-    // console.log(listenerFn)
-    console.log(this.projects);
+  addListener(listenerFn: Listener) {
+    console.log(this.listeners);
     this.listeners.push(listenerFn);
   }
 
   addProject(title: string, description: string, numOfPage: number) {
-    const newProject = {
-      id: Math.random().toString(),
-      title: title,
-      description: description,
-      people: numOfPage,
-    };
+    const newProject = new Project(
+      Math.random().toString(),
+      title,
+      description,
+      numOfPage,
+      ProjectStatus.Active
+    );
 
     this.projects.push(newProject);
 
     for (const listenerFn of this.listeners) {
+      //ส่ง listener ไปในทุกๆ project
+      console.log(this.projects.slice());
       listenerFn(this.projects.slice());
     }
   }
@@ -99,11 +119,48 @@ function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
   return adjdDescriptor;
 }
 
-class ProjectList {
+abstract class Component<T extends HTMLElement, U extends HTMLElement> {
+  templateElement: HTMLTemplateElement;
+  hostElement: T;
+  element: U;
+
+  constructor(
+    templateId: string,
+    hostElementId: string,
+    insertAtStart: boolean,
+    newElementId?: string
+  ) {
+    this.templateElement = <HTMLTemplateElement>(
+      document.getElementById(templateId)
+    );
+
+    this.hostElement = <T>document.getElementById(hostElementId)!;
+
+    const importNode = document.importNode(this.templateElement.content, true);
+    this.element = importNode.firstElementChild as U;
+    if (newElementId) {
+      this.element.id = newElementId;
+    }
+
+    this.attach(insertAtStart);
+  }
+
+  private attach(insertAtBeginning: boolean) {
+    this.hostElement.insertAdjacentElement(
+      insertAtBeginning ? "afterbegin" : "beforeend",
+      this.element
+    );
+  }
+
+  abstract configure(): void;
+  abstract renderContent(): void;
+}
+
+class ProjectList extends Component<> {
   templateElement: HTMLTemplateElement;
   hostElement: HTMLDivElement;
   element: HTMLElement;
-  assignProjects: any[];
+  assignProjects: Project[];
 
   constructor(private type: "active" | "finished") {
     this.templateElement = <HTMLTemplateElement>(
@@ -116,11 +173,21 @@ class ProjectList {
     this.element = importNode.firstElementChild as HTMLElement;
     this.element.id = `${this.type}-projects`;
 
-    projectState.addListener((projects: any[]) => {
-      console.log(projects);
-      this.assignProjects = projects;
+    //---------------------------------------------------------------------------------------------------------------------------------------
+    projectState.addListener((projects: Project[]) => {
+      const relevantProjects = projects.filter((prj) => {
+        if (this.type === "active") {
+          return prj.status === ProjectStatus.Active;
+        } else {
+          return prj.status === ProjectStatus.Finished;
+        }
+      });
+
+      this.assignProjects = relevantProjects;
       this.renderProjects();
     });
+    // above block of code will be executed, means that anonymous function will go and sit (no-execution will happen) inside listeners[] array.
+    // Because, the work of addListener() function is just to add a new function inside listeners[] array every time it get called.
 
     this.attach();
     this.renderContent();
@@ -130,6 +197,7 @@ class ProjectList {
     const listEl = <HTMLUListElement>(
       document.getElementById(`${this.type}-projects-list`)
     );
+    listEl.innerHTML = "";
     for (const prjItem of this.assignProjects) {
       const listItem = document.createElement("li");
       listItem.textContent = prjItem.title;
@@ -221,10 +289,10 @@ class ProjectInput {
     if (Array.isArray(userInput)) {
       const [title, desc, people] = userInput;
       projectState.addProject(title, desc, people);
-      // console.log(title, desc, people);
+      console.log(title, desc, people);
     }
 
-    this.clearInput();
+    // this.clearInput();
   }
 
   private clearInput() {
