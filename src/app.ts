@@ -14,26 +14,29 @@ class Project {
 }
 
 //Project State management
+type Listener<T> = (items: T[]) => void;
 
-type Listener = (items: Project[]) => void;
+class State<T> {
+  protected listeners: Listener<T>[] = [];
 
-class ProjectState {
-  private listeners: Listener[] = [];
+  addListener(listenerFn: Listener<T>) {
+    console.log(this.listeners);
+    this.listeners.push(listenerFn);
+  }
+}
 
+class ProjectState extends State<Project> {
   private projects: Project[] = [];
   private static instance: ProjectState;
 
-  private constructor() {}
+  private constructor() {
+    super();
+  }
 
   static getInstance() {
     if (this.instance) return this.instance;
     this.instance = new ProjectState();
     return this.instance;
-  }
-
-  addListener(listenerFn: Listener) {
-    console.log(this.listeners);
-    this.listeners.push(listenerFn);
   }
 
   addProject(title: string, description: string, numOfPage: number) {
@@ -156,6 +159,34 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement> {
   abstract renderContent(): void;
 }
 
+//ProjectItem Class
+class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> {
+  private project: Project;
+
+  get persons(): string {
+    if (this.project.people === 1) {
+      return "1 person";
+    } else {
+      return `${this.project.people} persons`;
+    }
+  }
+
+  constructor(hostId: string, project: Project) {
+    super("single-project", hostId, false, project.id);
+    this.project = project;
+
+    this.configure();
+    this.renderContent();
+  }
+
+  configure() {}
+  renderContent() {
+    this.element.querySelector("h2")!.textContent = this.project.title;
+    this.element.querySelector("h3")!.textContent = this.persons + " assigned";
+    this.element.querySelector("p")!.textContent = this.project.description;
+  }
+}
+
 class ProjectList extends Component<HTMLDivElement, HTMLElement> {
   assignProjects: Project[];
 
@@ -193,9 +224,10 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> {
     );
     listEl.innerHTML = "";
     for (const prjItem of this.assignProjects) {
-      const listItem = document.createElement("li");
-      listItem.textContent = prjItem.title;
-      listEl?.appendChild(listItem);
+      // const listItem = document.createElement("li");
+      // listItem.textContent = prjItem.title;
+      // listEl?.appendChild(listItem);
+      new ProjectItem(this.element.querySelector("ul")!.id, prjItem);
     }
   }
 
@@ -211,24 +243,13 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> {
   // }
 }
 
-class ProjectInput {
-  templateElement: HTMLTemplateElement;
-  hostElement: HTMLDivElement;
-  element: HTMLFormElement;
+class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
   titleInputElement: HTMLInputElement;
   descriptionInputElement: HTMLInputElement;
   peopleInputElement: HTMLInputElement;
 
   constructor() {
-    this.templateElement = <HTMLTemplateElement>(
-      document.getElementById("project-input")
-    );
-
-    this.hostElement = <HTMLDivElement>document.getElementById("app")!;
-
-    const importNode = document.importNode(this.templateElement.content, true);
-    this.element = importNode.firstElementChild as HTMLFormElement;
-    this.element.id = "user-input";
+    super("project-input", "app", true, "user-input");
 
     this.titleInputElement = this.element.querySelector(
       "#title"
@@ -241,7 +262,6 @@ class ProjectInput {
     ) as HTMLInputElement;
 
     this.configure();
-    this.attach();
   }
 
   private getherUserInput(): [string, string, number] | void {
@@ -295,14 +315,16 @@ class ProjectInput {
     this.peopleInputElement.value = "";
   }
 
-  private configure() {
+  renderContent() {}
+
+  configure() {
     // this.element.addEventListener("submit", this.submitHandler.bind(this));
     this.element.addEventListener("submit", this.submitHandler);
   }
 
-  private attach() {
-    this.hostElement.insertAdjacentElement("afterbegin", this.element);
-  }
+  // attach() {
+  //   this.hostElement.insertAdjacentElement("afterbegin", this.element);
+  // }
 }
 
 const projectInput = new ProjectInput();
