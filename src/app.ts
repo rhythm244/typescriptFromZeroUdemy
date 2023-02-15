@@ -1,3 +1,15 @@
+//Drag and Drop Interface
+interface Draggable {
+  dragStartHandler(event: DragEvent): void;
+  dragEndHandler(event: DragEvent): void;
+}
+
+interface DragTarget {
+  dragOverHandler(event: DragEvent): void; //permit to drop
+  dragHandler(event: DragEvent): void; //when actual drop
+  dragLeaveHandler(event: DragEvent): void; //feedback to user when drop complete.
+}
+
 //Project Type
 enum ProjectStatus {
   Active,
@@ -49,10 +61,18 @@ class ProjectState extends State<Project> {
     );
 
     this.projects.push(newProject);
+    this.updateListeners();
+  }
+  moveProject(projectId: string, newStatus: ProjectStatus) {
+    const project = this.projects.find((prj) => prj.id === projectId);
+    if (project && project.status !== newStatus) {
+      project.status = newStatus;
+      this.updateListeners();
+    }
+  }
 
+  private updateListeners() {
     for (const listenerFn of this.listeners) {
-      //ส่ง listener ไปในทุกๆ project
-      console.log(this.projects.slice());
       listenerFn(this.projects.slice());
     }
   }
@@ -160,7 +180,10 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement> {
 }
 
 //ProjectItem Class
-class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> {
+class ProjectItem
+  extends Component<HTMLUListElement, HTMLLIElement>
+  implements Draggable
+{
   private project: Project;
 
   get persons(): string {
@@ -179,7 +202,21 @@ class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> {
     this.renderContent();
   }
 
-  configure() {}
+  @autobind
+  dragStartHandler(event: DragEvent): void {
+    event.dataTransfer!.setData("text/plain", this.project.id);
+    event.dataTransfer!.effectAllowed = "move";
+  }
+
+  @autobind
+  dragEndHandler(_: DragEvent): void {
+    console.log("DragEnd");
+  }
+
+  configure() {
+    this.element.addEventListener("dragstart", this.dragStartHandler);
+    this.element.addEventListener("dragend", this.dragEndHandler);
+  }
   renderContent() {
     this.element.querySelector("h2")!.textContent = this.project.title;
     this.element.querySelector("h3")!.textContent = this.persons + " assigned";
@@ -201,8 +238,38 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> {
     this.renderContent();
   }
 
+  @autobind
+  dragOverHandler(event: DragEvent) {
+    if (event.dataTransfer && event.dataTransfer.types[0] === "text/plain") {
+      event.preventDefault();
+      const listEl = this.element.querySelector("ul")!;
+      listEl.classList.add("droppable");
+    }
+  }
+
+  @autobind
+  dropHandler(event: DragEvent) {
+    console.log(event.dataTransfer!.getData("text/plain"));
+
+    const prjId = event.dataTransfer!.getData("text/plain");
+    projectState.moveProject(
+      prjId,
+      this.type === "active" ? ProjectStatus.Active : ProjectStatus.Finished
+    );
+  }
+
+  @autobind
+  dragLaeveHandler(_: DragEvent) {
+    const listEl = this.element.querySelector("ul")!;
+    listEl.classList.remove("droppable");
+  }
+
   configure() {
-    // above block of code will be executed, means that anonymous function will go and sit (no-execution will happen) inside listeners[] array.
+    this.element.addEventListener("dragover", this.dragOverHandler);
+    this.element.addEventListener("dragleave", this.dragLaeveHandler);
+    this.element.addEventListener("drop", this.dropHandler);
+
+    // above below of code will be executed, means that anonymous function will go and sit (no-execution will happen) inside listeners[] array.
     // Because, the work of addListener() function is just to add a new function inside listeners[] array every time it get called.
     projectState.addListener((projects: Project[]) => {
       const relevantProjects = projects.filter((prj) => {

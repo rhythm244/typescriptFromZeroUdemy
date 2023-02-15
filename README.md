@@ -8,6 +8,7 @@ Learn Typescript from Max in Udemy.
 - [Class and Interface](#class-and-interface)
 - [Advanced Types](#advanced-types)
 - [Generic](#generic)
+- [Drag and Drop](#drag-and-drop)
 
 # Compiler Section
 
@@ -39,8 +40,6 @@ These links might also be interesting:
 
 #### Useful Resources & Links
 
-Attached you find all the code snapshots for this module - you also find them attached to individual lectures throughout this module.
-
 These links might also be interesting:
 
 More on Advanced Types: https://www.typescriptlang.org/docs/handbook/2/types-from-types.html
@@ -49,8 +48,12 @@ More on Advanced Types: https://www.typescriptlang.org/docs/handbook/2/types-fro
 
 #### Useful Resources & Links
 
-Attached you find all the code snapshots for this module - you also find them attached to individual lectures throughout this module.
-
 These links might also be interesting:
 
 More on Generics: https://www.typescriptlang.org/docs/handbook/generics.html
+
+# Drag and Drop
+
+These links might also be interesting:
+
+More on Drag & Drop: https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
