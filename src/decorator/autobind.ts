@@ -1,4 +1,4 @@
-namespace App {
+
   //auto bind decorator
   export function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
     console.log(descriptor);
@@ -13,4 +13,4 @@ namespace App {
 
     return adjdDescriptor;
   }
-}
+
