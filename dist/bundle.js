@@ -1,318 +1,260 @@
-"use strict";
-var _a;
-const e1 = {
-    name: "Thong",
-    privileges: ["create-server"],
-    startDate: new Date(),
-};
-function add7(n1, n2) {
-    if (typeof n1 === "string" || typeof n2 === "string") {
-        return n1.toString() + n2.toString();
-    }
-    return n1 + n2;
-}
-function printEmployeeInfomation(emp) {
-    console.log(`Name ${emp.name}`);
-    if ("privileges" in emp) {
-        console.log(`Privileage ${emp.privileges}`);
-    }
-    if ("startDate" in emp) {
-        console.log(`Start Date:  ${emp.startDate}`);
-    }
-}
-printEmployeeInfomation(e1);
-class Car {
-    drive() {
-        console.log("Driving.....");
-    }
-}
-class Truck {
-    drive() {
-        console.log("Driving truck.....");
-    }
-    loadCargo(amount) {
-        console.log("Loading Cargo..." + amount);
-    }
-}
-const v1 = new Car();
-const v2 = new Truck();
-function useVihecle(vihecle) {
-    vihecle.drive();
-    if (vihecle instanceof Truck)
-        vihecle.loadCargo(1000);
-}
-useVihecle(v1);
-useVihecle(v2);
-function moveAnimal(animal) {
-    let speed;
-    switch (animal.type) {
-        case "bird":
-            speed = animal.flyingSpeed;
-            break;
-        case "horse":
-            speed = animal.runningSpeed;
-    }
-}
-moveAnimal({ type: "bird", flyingSpeed: 10 });
-const paragraph = document.getElementById("message-output");
-const userInputElement = document.getElementById("user-intput");
-userInputElement.value = "Hi there";
-const errorBag = {
-    email: "Not a valid email",
-    userName: "Must start with character",
-};
-console.log(errorBag);
-function add8(n1, n2) {
-    if (typeof n1 === "string" || typeof n2 === "string") {
-        return n1.toString() + n2.toString();
-    }
-    return n1 + n2;
-}
-const result = add8(1, 5);
-const fetchUserData = {
-    id: "u1",
-    name: "Max",
-    job: { title: "CEO", description: "My own company." },
-};
-console.log((_a = fetchUserData === null || fetchUserData === void 0 ? void 0 : fetchUserData.job) === null || _a === void 0 ? void 0 : _a.title);
-const userInput2 = "";
-const storedData = userInput2 || "Default";
-const storedData2 = userInput2 !== null && userInput2 !== void 0 ? userInput2 : "Default555";
-console.log(storedData2);
-const logger = () => {
-    const userData = {
-        username: "Thong",
-        id: "rwge;agndfnvierpjngoesge",
-        firstName: "wasawat",
-        lastName: "bourperk",
-        birthDate: new Date("1995-09-24"),
-        address: ["65/110 vistavile", "poemsin16"],
+(() => {
+  "use strict";
+  function e(e, t, n) {
+    console.log(n);
+    const r = n.value;
+    return {
+      configurable: !0,
+      get() {
+        return r.bind(this);
+      },
     };
-    let Role;
-    (function (Role) {
-        Role[Role["ADMIN"] = 0] = "ADMIN";
-        Role[Role["READ_ONLY"] = 1] = "READ_ONLY";
-        Role[Role["EDITOR"] = 2] = "EDITOR";
-    })(Role || (Role = {}));
-    console.log(userData);
-    return 0;
-};
-function combine(input1, input2) {
-    let result;
-    if (typeof input1 === "number" && typeof input2 === "number") {
-        result = input1 + input2;
-        return result;
+  }
+  var t;
+  !(function (e) {
+    (e[(e.Active = 0)] = "Active"), (e[(e.Finished = 1)] = "Finished");
+  })(t || (t = {}));
+  class n {
+    constructor(e, t, n, r, s) {
+      (this.id = e),
+        (this.title = t),
+        (this.description = n),
+        (this.people = r),
+        (this.status = s);
     }
-    else {
-        result = input1.toString() + input2.toString();
-        return result;
+  }
+  class r {
+    constructor(e, t, n, r) {
+      (this.templateElement = document.getElementById(e)),
+        (this.hostElement = document.getElementById(t));
+      const s = document.importNode(this.templateElement.content, !0);
+      (this.element = s.firstElementChild),
+        r && (this.element.id = r),
+        this.attach(n);
     }
-}
-const combineAges = combine(30, 20);
-function combineLiteral(input1, input2, resultConversion) {
-    let result;
-    if (typeof input1 === "number" && typeof input2 === "number") {
-        result = input1 + input2;
-        return result;
+    attach(e) {
+      this.hostElement.insertAdjacentElement(
+        e ? "afterbegin" : "beforeend",
+        this.element
+      );
     }
-    else {
-        result = input1.toString() + input2.toString();
-        return result;
+  }
+  class s {
+    constructor() {
+      this.listeners = [];
     }
-}
-function add(n1, n2) {
-    return n1 + n2;
-}
-function printResult(num) {
-    console.log("Result: " + num);
-}
-printResult(add(5, 12));
-let combineValues;
-combineValues = add;
-function addAndHandler(n1, n2, callback) {
-    const result = n1 + n2;
-    callback(result);
-}
-addAndHandler(10, 20, (result) => {
-    console.log(result);
-});
-let userInput;
-let userName;
-userInput = 5;
-userInput = "Max";
-if (typeof userInput === "string") {
-    userName = userInput;
-}
-function gernerateError(message, code) {
-    throw { message: message, errorCode: code };
-}
-function test() {
-    console.log('test');
-}
-class Department {
-    constructor(id, name) {
-        this.id = id;
-        this.name = name;
-        this.employees = [];
-        this.thong = 0;
+    addListener(e) {
+      console.log(this.listeners), this.listeners.push(e);
     }
-    describe() {
-        console.log("This is Department Class.");
-    }
-    static createEmployee(name) {
-        return { name: name };
-    }
-    addEmployee(employee) {
-        this.employees.push(employee);
-    }
-    printEmployeeInfomation() {
-        console.log(this.employees.length);
-        console.log(this.employees);
-    }
-}
-class ITDepartment extends Department {
-    constructor(id, admin) {
-        super(id, "IT");
-        this.admin = [];
-        this.admin = admin;
-    }
-}
-class AccountingDepartment extends Department {
-    constructor(id, report) {
-        super(id, "Accounting");
-        this.report = report;
+  }
+  class i extends s {
+    constructor() {
+      super(), (this.projects = []);
     }
     static getInstance() {
-        if (AccountingDepartment.instance) {
-            return this.instance;
-        }
-        this.instance = new AccountingDepartment("d2", []);
-        return this.instance;
+      return this.instance || (this.instance = new i()), this.instance;
     }
-}
-const accounting = new ITDepartment("xyz", ["thong"]);
-const accounting2 = AccountingDepartment.getInstance();
-console.log(accounting2);
-accounting.addEmployee("Max");
-accounting.addEmployee("Menu");
-accounting.describe();
-accounting.printEmployeeInfomation();
-console.log(accounting);
-const button = document.querySelector("button");
-function clickHandler(message) {
-    console.log("Clicked! " + message);
-}
-if (button) {
-    button.addEventListener("click", clickHandler.bind(null, "Hello thong You are "));
-}
-const printOutput = (output) => {
-    console.log(output);
-    return output;
-};
-const DJnui = (message) => {
-    return message;
-};
-function greeter(fn) {
-}
-const hobbies = ["Sport", "Cooking"];
-const activeHobbies = ["Hiking"];
-activeHobbies.push(...hobbies);
-const person = {
-    firstName: "Max",
-    age: 30,
-};
-const copiesPerson = person;
-const copiesPersonTwo = Object.assign({}, person);
-const addTwo = (...numbers) => {
-    return numbers.reduce((curResult, curValue) => {
-        return curResult + curValue;
-    }, 0);
-};
-const addNumbers = printOutput(addTwo(5, 10, 2, 3, 7));
-const [hobby1, hobby2, ...rest] = hobbies;
-const { firstName: userName2, age } = person;
-console.log(userName2, age);
-const names = [];
-const promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve("This is done!");
-    }, 2000);
-});
-promise.then((res) => console.log(res));
-function merge(a, b) {
-    return Object.assign(a, b);
-}
-console.log(merge({ name: "Max" }, { age: 30 }));
-let mergedObj = merge({ name: "Max", hobbies: ["Sports"] }, { age: 30 });
-console.log(mergedObj);
-let mergedObj2 = merge({ name: "Max", hobbies: ["Sports"] }, { age: 30 });
-console.log(mergedObj2);
-function countAndDescribe(element) {
-    let descriptionText = "Got no value.";
-    if (element.length === 0) {
-        descriptionText = "Got 1 element.";
+    addProject(e, r, s) {
+      const i = new n(Math.random().toString(), e, r, s, t.Active);
+      this.projects.push(i), this.updateListeners();
     }
-    else if (element.length > 1) {
-        descriptionText = "Got " + element.length + " elements.";
+    moveProject(e, t) {
+      const n = this.projects.find((t) => t.id === e);
+      n && n.status !== t && ((n.status = t), this.updateListeners());
     }
-    return [element, descriptionText];
-}
-console.log(countAndDescribe("Hi there"));
-function extraAndConvert(obj, key) {
-    return obj[key];
-}
-console.log(extraAndConvert({ name: "Max" }, "name"));
-class DataStorage {
+    updateListeners() {
+      for (const e of this.listeners) e(this.projects.slice());
+    }
+  }
+  const l = i.getInstance();
+  var o = function (e, t, n, r) {
+    var s,
+      i = arguments.length,
+      l =
+        i < 3
+          ? t
+          : null === r
+          ? (r = Object.getOwnPropertyDescriptor(t, n))
+          : r;
+    if ("object" == typeof Reflect && "function" == typeof Reflect.decorate)
+      l = Reflect.decorate(e, t, n, r);
+    else
+      for (var o = e.length - 1; o >= 0; o--)
+        (s = e[o]) && (l = (i < 3 ? s(l) : i > 3 ? s(t, n, l) : s(t, n)) || l);
+    return i > 3 && l && Object.defineProperty(t, n, l), l;
+  };
+  class a extends r {
+    get persons() {
+      return 1 === this.project.people
+        ? "1 person"
+        : `${this.project.people} persons`;
+    }
+    constructor(e, t) {
+      super("single-project", e, !1, t.id),
+        (this.project = t),
+        this.configure(),
+        this.renderContent();
+    }
+    dragStartHandler(e) {
+      e.dataTransfer.setData("text/plain", this.project.id),
+        (e.dataTransfer.effectAllowed = "move");
+    }
+    dragEndHandler(e) {
+      console.log("DragEnd");
+    }
+    configure() {
+      this.element.addEventListener("dragstart", this.dragStartHandler),
+        this.element.addEventListener("dragend", this.dragEndHandler);
+    }
+    renderContent() {
+      (this.element.querySelector("h2").textContent = this.project.title),
+        (this.element.querySelector("h3").textContent =
+          this.persons + " assigned"),
+        (this.element.querySelector("p").textContent =
+          this.project.description);
+    }
+  }
+  o([e], a.prototype, "dragStartHandler", null),
+    o([e], a.prototype, "dragEndHandler", null);
+  var c = function (e, t, n, r) {
+    var s,
+      i = arguments.length,
+      l =
+        i < 3
+          ? t
+          : null === r
+          ? (r = Object.getOwnPropertyDescriptor(t, n))
+          : r;
+    if ("object" == typeof Reflect && "function" == typeof Reflect.decorate)
+      l = Reflect.decorate(e, t, n, r);
+    else
+      for (var o = e.length - 1; o >= 0; o--)
+        (s = e[o]) && (l = (i < 3 ? s(l) : i > 3 ? s(t, n, l) : s(t, n)) || l);
+    return i > 3 && l && Object.defineProperty(t, n, l), l;
+  };
+  class d extends r {
+    constructor(e) {
+      super("project-list", "app", !1, `${e}-projects`),
+        (this.type = e),
+        (this.assignProjects = []),
+        this.configure(),
+        this.renderContent();
+    }
+    dragOverHandler(e) {
+      e.dataTransfer &&
+        "text/plain" === e.dataTransfer.types[0] &&
+        (e.preventDefault(),
+        this.element.querySelector("ul").classList.add("droppable"));
+    }
+    dropHandler(e) {
+      console.log(e.dataTransfer.getData("text/plain"));
+      const n = e.dataTransfer.getData("text/plain");
+      l.moveProject(n, "active" === this.type ? t.Active : t.Finished);
+    }
+    dragLaeveHandler(e) {
+      this.element.querySelector("ul").classList.remove("droppable");
+    }
+    configure() {
+      this.element.addEventListener("dragover", this.dragOverHandler),
+        this.element.addEventListener("dragleave", this.dragLaeveHandler),
+        this.element.addEventListener("drop", this.dropHandler),
+        l.addListener((e) => {
+          const n = e.filter((e) =>
+            "active" === this.type
+              ? e.status === t.Active
+              : e.status === t.Finished
+          );
+          (this.assignProjects = n), this.renderProjects();
+        });
+    }
+    renderProjects() {
+      document.getElementById(`${this.type}-projects-list`).innerHTML = "";
+      for (const e of this.assignProjects)
+        new a(this.element.querySelector("ul").id, e);
+    }
+    renderContent() {
+      const e = `${this.type}-projects-list`;
+      (this.element.querySelector("ul").id = e),
+        (this.element.querySelector("h2").textContent =
+          this.type.toUpperCase() + " PROJECTS");
+    }
+  }
+  function p(e) {
+    let t = !0;
+    return (
+      e.required && (t = t && 0 !== e.value.toString().trim().length),
+      null != e.minLength &&
+        "string" == typeof e.value &&
+        (t = t && e.value.length >= e.minLength),
+      null != e.maxLength &&
+        "string" == typeof e.value &&
+        (t = t && e.value.length <= e.maxLength),
+      null != e.min &&
+        "number" == typeof e.value &&
+        (t = t && e.value >= e.min),
+      null != e.max &&
+        "number" == typeof e.value &&
+        (t = t && e.value <= e.max),
+      t
+    );
+  }
+  c([e], d.prototype, "dragOverHandler", null),
+    c([e], d.prototype, "dropHandler", null),
+    c([e], d.prototype, "dragLaeveHandler", null);
+  class u extends r {
     constructor() {
-        this.data = [];
+      super("project-input", "app", !0, "user-input"),
+        (this.titleInputElement = this.element.querySelector("#title")),
+        (this.descriptionInputElement =
+          this.element.querySelector("#description")),
+        (this.peopleInputElement = this.element.querySelector("#people")),
+        this.configure();
     }
-    addItem(item) {
-        this.data.push(item);
+    configure() {
+      this.element.addEventListener("submit", this.submitHandler);
     }
-    removeItem(item) {
-        if (this.data.indexOf(item) === -1)
-            return;
-        this.data.splice(this.data.indexOf(item), 1);
+    renderContent() {}
+    gatherUserInput() {
+      const e = this.titleInputElement.value,
+        t = this.descriptionInputElement.value,
+        n = this.peopleInputElement.value,
+        r = { value: t, required: !0, minLength: 5 },
+        s = { value: +n, required: !0, min: 1, max: 5 };
+      return p({ value: e, required: !0 }) && p(r) && p(s)
+        ? [e, t, +n]
+        : void alert("Invalid input, please try again!");
     }
-    getItem() {
-        return [...this.data];
+    clearInputs() {
+      (this.titleInputElement.value = ""),
+        (this.descriptionInputElement.value = ""),
+        (this.peopleInputElement.value = "");
     }
-}
-const textStorage = new DataStorage();
-textStorage.addItem("Max");
-textStorage.addItem("Manu");
-textStorage.removeItem("Max");
-console.log(textStorage.getItem());
-const numberStoage = new DataStorage();
-const objStorage = new DataStorage();
-objStorage.addItem({ name: "Max" });
-objStorage.addItem({ name: "Manu" });
-objStorage.removeItem({ name: "Max" });
-console.log(objStorage.getItem());
-function createCoruseGoal(title, desc, date) {
-    let courseGoal = {};
-    courseGoal.title = title;
-    courseGoal.desc = desc;
-    courseGoal.completeUnit = date;
-    return courseGoal;
-}
-const names5 = ["Max", "Manu"];
-console.log("interface");
-class Person {
-    constructor(n) {
-        if (n) {
-            this.name = n;
-        }
-        this.age = 33;
+    submitHandler(e) {
+      e.preventDefault();
+      const t = this.gatherUserInput();
+      if (Array.isArray(t)) {
+        const [e, n, r] = t;
+        l.addProject(e, n, r), this.clearInputs();
+      }
     }
-    greet(phase) {
-        console.log(`${phase} ${this.name}`);
-    }
-}
-let user1;
-user1 = new Person("Thong");
-console.log(user1.name);
-let add5;
-add5 = (n1, n2) => {
-    return n1 + n2;
-};
+  }
+  !(function (e, t, n, r) {
+    var s,
+      i = arguments.length,
+      l =
+        i < 3
+          ? t
+          : null === r
+          ? (r = Object.getOwnPropertyDescriptor(t, n))
+          : r;
+    if ("object" == typeof Reflect && "function" == typeof Reflect.decorate)
+      l = Reflect.decorate(e, t, n, r);
+    else
+      for (var o = e.length - 1; o >= 0; o--)
+        (s = e[o]) && (l = (i < 3 ? s(l) : i > 3 ? s(t, n, l) : s(t, n)) || l);
+    i > 3 && l && Object.defineProperty(t, n, l);
+  })([e], u.prototype, "submitHandler", null),
+    new u(),
+    new d("active"),
+    new d("finished");
+})();
