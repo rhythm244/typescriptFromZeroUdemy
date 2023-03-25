@@ -1,73 +1,46 @@
-# TypescriptFromZeroUdemy
+# Getting Started with Create React App
 
-Learn Typescript from Max in Udemy.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Table of Contents
+## Available Scripts
 
-- [Compiler section](#compiler-section)
-- [Class and Interface](#class-and-interface)
-- [Advanced Types](#advanced-types)
-- [Generic](#generic)
-- [Drag and Drop](#drag-and-drop)
-- [Modules and namespaces](#modules-and-namespaces)
-- [Webpack Setup](#webpack-setup)
+In the project directory, you can run:
 
-# Compiler Section
+### `npm start`
 
-#### Useful Resources & Links
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Attached you find all the code snapshots for this module - you also find them attached to individual lectures throughout this module.
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-These links might also be interesting:
+### `npm test`
 
-1. tsconfig Docs: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-2. Compiler Config Docs: https://www.typescriptlang.org/docs/handbook/compiler-options.html
+### `npm run build`
 
-3. VS Code TS Debugging: https://code.visualstudio.com/docs/typescript/typescript-debugging
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-# Class and Interface
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-#### Useful Resources & Links
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-Attached you find all the code snapshots for this module - you also find them attached to individual lectures throughout this module.
+### `npm run eject`
 
-These links might also be interesting:
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-- More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-- More on TS Interfaces: https://www.typescriptlang.org/docs/handbook/2/objects.html
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-# Advanced Types
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-#### Useful Resources & Links
+## Learn More
 
-These links might also be interesting:
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-More on Advanced Types: https://www.typescriptlang.org/docs/handbook/2/types-from-types.html
-
-# Generic
-
-#### Useful Resources & Links
-
-These links might also be interesting:
-
-More on Generics: https://www.typescriptlang.org/docs/handbook/generics.html
-
-# Drag and Drop
-
-These links might also be interesting:
-
-More on Drag & Drop: https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
-
-# Modules and namespaces
-
-JavaScript Modules (Overview): https://medium.com/computed-comparisons/commonjs-vs-amd-vs-requirejs-vs-es6-modules-2e814b114a0b
-
-More on ES Modules: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
-
-# Webpack Setup
-
-These links might also be interesting:
-
-Official Webpack Docs: https://webpack.js.org/
+To learn React, check out the [React documentation](https://reactjs.org/).
