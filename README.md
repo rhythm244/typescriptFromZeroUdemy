@@ -11,6 +11,7 @@ Learn Typescript from Max in Udemy.
 - [Drag and Drop](#drag-and-drop)
 - [Modules and namespaces](#modules-and-namespaces)
 - [Webpack Setup](#webpack-setup)
+- [React Typescript](#react-typescript)
 
 # Compiler Section
 
@@ -71,3 +72,13 @@ More on ES Modules: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guid
 These links might also be interesting:
 
 Official Webpack Docs: https://webpack.js.org/
+
+# React Typescript
+
+These links might also be interesting:
+
+Official React Docs: https://reactjs.org/docs/getting-started.html
+
+More React Resources: https://academind.com/learn/react/
+
+create-react-app + TypeScript Docs: https://create-react-app.dev/docs/adding-typescript/
