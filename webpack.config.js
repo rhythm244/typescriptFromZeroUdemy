@@ -21,6 +21,7 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".js"],
   },
+  devServer: { static: "./" },
 };
 
 // 1) Add a devServer option
