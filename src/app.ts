@@ -1,6 +1,13 @@
-import { ProjectList } from "./components/project-list";
-import { ProjectInput } from "./components/project-input";
+import { Product } from "./product.js";
 
-const projectInput = new ProjectInput();
-const activeProjectList = new ProjectList("active");
-const finishedProjectList = new ProjectList("finished");
+const product = [
+  { title: "A Capter", price: 29.99 },
+  { title: "A Book", price: 15.99 },
+];
+
+// const p1 = new Product("A book", 12.99);
+const lodashProduct = product.map((prod) => {
+  // return new Pro
+});
+
+// console.log(p1.getInfomation());
