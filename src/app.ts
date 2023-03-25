@@ -1,13 +1,11 @@
-import { Product } from "./product.js";
+const form = document.querySelector("form") as HTMLFormElement;
+const addressInput = document.getElementById("address")! as HTMLInputElement;
 
-const product = [
-  { title: "A Capter", price: 29.99 },
-  { title: "A Book", price: 15.99 },
-];
+const searchAddressHandler = (event: Event) => {
+  event.preventDefault();
+  const enteredAddress = addressInput.value;
 
-// const p1 = new Product("A book", 12.99);
-const lodashProduct = product.map((prod) => {
-  // return new Pro
-});
+  //send this to Google map API.
+};
 
-// console.log(p1.getInfomation());
+form.addEventListener("submit", searchAddressHandler);
